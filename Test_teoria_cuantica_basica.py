@@ -1,6 +1,5 @@
 import unittest
 import Teoria_cuantica_basica as lb
-import numpy as np
 import math
 
 class TestLibMatrixComplex(unittest.TestCase):
@@ -21,3 +20,5 @@ class TestLibMatrixComplex(unittest.TestCase):
 
 if __name__ == '__main__':
         unittest.main()
+
+
