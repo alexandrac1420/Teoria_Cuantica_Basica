@@ -1,5 +1,5 @@
 import vec_matrix_complex as lb
-import math
+import numpy as np
 def probabilidad_posicion(vec,posicion):
     if posicion >= 0 and posicion < len(vec):
         modu = lb.norm_vec(vec)
@@ -13,7 +13,8 @@ def normalizate_vec(vec1):
     norm = lb.norm_vec(vec1)
     normalizate =lb.mult_esc_vec((1/norm), vec1)
     return normalizate
-def probabilidad_transicion(vec1,vec2):
+
+def amplitud_transicion(vec1,vec2):
     if lb.norm_vec(vec1) and lb.norm_vec(vec2):
         probabilidad =lb.prod_int_vec(vec2,vec1)
         return probabilidad
@@ -21,5 +22,32 @@ def probabilidad_transicion(vec1,vec2):
     else:
         vec1 = normalizate_vec(vec1)
         vec2 = normalizate_vec(vec2)
-        probabilidad_transicion(vec1, vec2)
+        amplitud_transicion(vec1, vec2)
+
+def probabilidad_transicion(vec1,vec2):
+    amplitud = amplitud_transicion(vec1, vec2)
+    modulo = np.abs(amplitud)
+    return modulo
+
+def valor_esperado(matrix, vec):
+    if lb.hermitian_matrix(matrix):
+        respuesta = lb.act_matrix_vec(matrix,vec)
+        return lb.prod_int_vec(respuesta,vec)
+    else:
+        raise Exception ("Error: La matriz no es hermitiana")
+
+def varianza (matrix, vec):
+    media = valor_esperado(matrix, vec)
+    row, col = matrix.shape
+    identidad = np.eye(row, col)
+
+    operador_delta = matrix - lb.mult_esc_vec(media, identidad)
+    mult_operador_delta = lb.mult_matrix(operador_delta, operador_delta)
+
+    adj_vec = lb.inv_vec_complex(vec)
+    acc_matrx_vec = lb.act_matrix_vec(mult_operador_delta, vec)
+    varianza = lb.prod_int_vec(adj_vec, acc_matrx_vec)
+
+    return varianza
+
 
