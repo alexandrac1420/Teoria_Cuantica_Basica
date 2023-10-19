@@ -1,5 +1,6 @@
 import vec_matrix_complex as lb
 import numpy as np
+
 def probabilidad_posicion(vec,posicion):
     if posicion >= 0 and posicion < len(vec):
         modu = lb.norm_vec(vec)
@@ -48,6 +49,4 @@ def varianza (matrix, vec):
     acc_matrx_vec = lb.act_matrix_vec(mult_operador_delta, vec)
     varianza = lb.prod_int_vec(adj_vec, acc_matrx_vec)
 
-    return varianza
-
-
+    return -varianza
