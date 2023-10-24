@@ -5,6 +5,11 @@ El sistema consiste en una partícula confinada a un conjunto discreto de posici
 2. El sistema si se le da otro vector Ket debe buscar la probabilidad de transitar del primer vector al segundo.
 3. Amplitud de transición. El sistema puede recibir dos vectores y calcular la probabilidad de transitar de el uno al otro después de hacer la observación
 4. Ahora con una matriz que describa un observable y un vector ket, el sistema revisa que la matriz sea hermitiana, y si lo es, calcula la media y la varianza del observable en el estado dado.
+5. El sistema calcula los valores propios del observable y la probabilidad de que el sistema transite a alguno de los vectores propios después de la observación.
+6. Se considera la dinámica del sistema. Ahora con una serie de matrices Un el sistema calcula el estado final a partir de un estado inicial.
+
+Ademas contiene unos ejercicios desarrollados del libro "Noson S. Yanofsky, Mirco A. Mannucci. Quantum Computing for Computer Scientists.
+Cambridge University Press. 2013 (First published 2008)"
 ## Operaciones disponibles 
 Dentro del programa se pueden realizar las siguientes operaciones:
 * Calcular la probabilidad de encontrar la particula en una posición en particular.
@@ -12,6 +17,9 @@ Dentro del programa se pueden realizar las siguientes operaciones:
 * Calcular la amplitud de transicion entre dos vectores.
 * Calcular el valor esperado entre una matriz y un vector (media de resultados).
 * Calcular la varianza entre una matriz y un vector.
+* Calcular los valores propios del observable 
+* Calcular la probabilidad de que el sistema transite a alguno de los vectores propios después de la observación.
+* Calcular el estado final a partir de un estado inicial.
 
 ## ¿Cómo obtener una copia del repositorio?
 ### Pre-requisitos
@@ -36,6 +44,11 @@ Ademas se recomienda descargar la libreria de phyton numpy. Esta se puede descar
 2. Ejecuta el siguiente comando: 'pip install numpy'
 3. Una vez que la instalación se complete con éxito, abre el intérprete de Python y ejecuta 'import numpy as np'. Si no se produce ningún error, significa que NumPy se ha instalado correctamente.
 
+Si a su vez desea correr los ejercicos desarrollado del libro debe descargar la libreria scipy la cual contiene unas variables necesarias para el ejercicio. Esta libreria se puede descargar de la siguiente manera:
+1. Abre una terminal o línea de comandos en tu sistema.
+2. Ejecuta el siguiente comando: 'pip install scipy'
+3. Una vez que la instalación se complete con éxito, abre el intérprete de Python y ejecuta 'from scipy.constants import hbar'. Si no se produce ningún error, significa que NumPy se ha instalado correctamente.
+
 ## Modo de uso
 Para utilizar esta librería es necesario conocer la estructura de entrada de las operaciones disponibles junto con la sintaxis adecuada de cada una de las operaciones.
 
@@ -52,6 +65,8 @@ A continuación se presenta la sintaxis correcta para el uso de las operaciones 
 * __Calcular la amplitu de transicion de un vector a otro__:amplitud_transición (_vector 1, vector 2_)
 * __Calcular el valor esperado de una matriz (observable) y un vector (ket)__:valor_esperado (_matriz, vector_)
 * __Calcular la varianza de una matriz (observable) y un vector (ket)__:varianza (_matriz, vector_)
+* __Calcular los valores propios del observable y la probabilidad de que el sistema transite a alguno de los vectores propios después de la observación__:val_propio_probabilidad(_vector,matriz_)
+* __Calcular el estado final a partir de un estado inicial__: dinamica_sist(_vector, matriz_)
 
 Tenga en cuenta que es necesario utilizar la representacion de los numeros mencionada anteriormente.
 
@@ -105,9 +120,35 @@ v4 = [(math.sqrt(2))/2,-(math.sqrt(2))/2 ]
 resultado = lb.varianza(m1,v4)
 print(resultado)
 
+#Calcular los valores propios del observable y la probabilidad de que el sistema transite a alguno de los vectores propios después de la observación
+#Ingrese la matriz y el vector
+m1 = np.array([[complex(3,0),complex(1,2)],[complex(1,-2), complex(-1,0)]])
+v4 = [(math.sqrt(2))/2,-(math.sqrt(2))/2 ]
+
+#Realice la simulacion
+resultado = lb.val_propio_probabilidad(m1,v4)
+#En este ejercicio se generará los valores propios y las probabilidades en conjunto, si desea verlos separados puede realizar la siguiente aación:
+valores_propios = resultado[0]
+print(valores_propios)
+probabilidades = resultado[1]
+print(probabilidades)
+
+#Calcular el estado final a partir de un estado inicial
+#Ingrese la matriz y el vector
+m1 = np.array([[complex(3,0),complex(1,2)],[complex(1,-2), complex(-1,0)]])
+v4 = [(math.sqrt(2))/2,-(math.sqrt(2))/2 ]
+
+#Realice la simulacion
+resultado = lb.dinamica_sist(m1,v4)
+print(resultado)
+
+
 ~~~
-
-
+## Ejercicios desarrollados
+En este repositorio se encuentra la solución de algunos problemas del libro "Noson S. Yanofsky, Mirco A. Mannucci. Quantum Computing for Computer Scientists.
+Cambridge University Press. 2013 (First published 2008)" en el archivo de Ejercicios.py, a continuación se presenta la discusión de los puntos 4.5.2 y 4.5.3
+![img.png](img.png)
+![img_1.png](img_1.png)
 ## Construido con
 * Phyton 3.11.4
   

@@ -2,5 +2,8 @@
 /venv
 /.idea
 /__pycache__
+# Ignorar imágenes
+img.png
+img_1.png
 
 

@@ -50,6 +50,33 @@ class TestLibMatrixComplex(unittest.TestCase):
         prueba_2 = lb.varianza(self.m4, self.v9)
         self.assertAlmostEqual(prueba_2,1)
 
+    v10 = [complex(1,0), complex(-1,0)]
+    v11 = [complex(1, 0), complex(1, 0)]
+    def test_val_prop_probabilidades(self):
+        prueba_1 = lb.val_propio_probabilidad(self.v10,self.m3)
+        valores_propios = np.real(prueba_1[0])
+        probabilidades = prueba_1[1]
+        self.assertAlmostEqual(valores_propios[0],0.38196601)
+        self.assertAlmostEqual(valores_propios[1],2.61803399)
+        self.assertAlmostEqual(probabilidades[0],1)
+        self.assertAlmostEqual(probabilidades[1],1)
+
+        prueba_2 = lb.val_propio_probabilidad(self.v11, self.m4)
+        valores_propios = np.real(prueba_2[0])
+        probabilidades = prueba_2[1]
+        self.assertAlmostEqual(valores_propios[0],1)
+        self.assertAlmostEqual(valores_propios[1],-1)
+        self.assertAlmostEqual(probabilidades[0],1)
+        self.assertAlmostEqual(probabilidades[1],1)
+
+    def test_dinamica_sist(self):
+        prueba_1 = lb.dinamica_sist(self.v10,self.m3)
+        self.assertAlmostEqual(prueba_1[0], complex(-1,1))
+        self.assertAlmostEqual(prueba_1[1], complex(2,2))
+        prueba_2 = lb.dinamica_sist(self.v11,self.m4)
+        self.assertAlmostEqual(prueba_2[0], complex(0,0))
+        self.assertAlmostEqual(prueba_2[1], complex(-1,0))
+
 if __name__ == '__main__':
         unittest.main()
 

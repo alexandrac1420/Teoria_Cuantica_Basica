@@ -50,3 +50,20 @@ def varianza (matrix, vec):
     varianza = lb.prod_int_vec(adj_vec, acc_matrx_vec)
 
     return -varianza
+
+def val_propio_probabilidad(vec,matrix):
+    probabilades =[]
+    val_propios = lb.val_prop_matrix(matrix)[1]
+    for val in val_propios:
+        probabilades.append(probabilidad_transicion(vec,val))
+
+    return lb.val_prop_matrix(matrix)[0], probabilades
+
+
+def dinamica_sist(vec, matrix):
+    estado_final = vec
+    for valores in matrix:
+        estado_final = lb.act_matrix_vec(valores,estado_final)
+    return estado_final
+
+
